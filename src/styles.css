@@ -142,4 +142,10 @@ body {
   .h-5 {
     height: 1.25rem;
   }
-  
+  .glass {
+    @apply bg-white/10 backdrop-blur-md shadow-lg rounded-xl border border-white/30;
+  }
+  body {
+    @apply bg-gradient-to-br from-[#0f2027] via-[#203a43] to-[#2c5364] text-white;
+    font-family: 'Inter', sans-serif;
+  }

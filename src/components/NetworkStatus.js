@@ -1,6 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const NetworkStatus = ({ status = "alert", setStatus }) => {
+const NetworkStatus = ({ setStatus }) => {
+  const [status, setLocalStatus] = useState("alert"); // default
+
+  useEffect(() => {
+    fetch("http://localhost:8080/api/status")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status) {
+          setLocalStatus(data.status);
+          setStatus && setStatus(data.status); // update global state
+        }
+      })
+      .catch((err) => console.error("Failed to fetch status:", err));
+  }, []);
+
   let statusText = "";
   let icon = "";
   let bgColor = "";
@@ -28,15 +42,14 @@ const NetworkStatus = ({ status = "alert", setStatus }) => {
   }
 
   const handleClear = () => {
-    if (status !== "safe") {
-      setStatus("safe");
-    }
+    setLocalStatus("safe");
+    setStatus && setStatus("safe");
   };
 
   return (
     <div className="bg-white p-6 mt-6 rounded-md shadow-md flex justify-between items-center">
       <div>
-        <h2 className="text-2xl font-bold">Network Status :</h2>
+        <h2 className="text-2xl font-bold text-black">Network Status :</h2>
         <p className={`flex items-center space-x-2 mt-2 ${textColor}`}>
           <span>{icon}</span> <span>{statusText}</span>
         </p>

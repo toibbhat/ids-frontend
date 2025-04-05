@@ -13,12 +13,12 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="flex justify-end space-x-4 p-4 bg-gray-200">
+    <div className= "bg-gradient-to-r from-blue-200/30 to-purple-200/30 backdrop-blur-xl rounded-xl shadow-xl p-4 mx-6 mt-4 flex justify-center space-x-4">
       {buttons.map((btn) => (
         <button
           key={btn.label}
           onClick={() => navigate(btn.route)}
-          className="border border-gray-500 px-4 py-2 rounded-md hover:bg-gray-300"
+          className="text-gray-900 px-4 py-2 rounded-lg bg-white/40 hover:bg-white/70 hover:shadow-lg hover:scale-105 transform transition-all duration-200 font-semibold"
         >
           {btn.label}
         </button>
